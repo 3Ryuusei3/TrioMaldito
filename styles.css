@@ -171,6 +171,7 @@ body {
 }
 
 .winning-message button {
+	color: black;
 	font-size: 2rem;
 	background: linear-gradient(
 		135deg,
