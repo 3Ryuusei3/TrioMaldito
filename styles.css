@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+:root {
+	--cell-size: 90px;
+	--mark-size: calc(var(--cell-size) * 0.9);
+}
+
+body {
+	margin: 0;
+	/* background: linear-gradient(235deg, #f2d08b, #92c8a4, #aa8dbb); */
+	background: linear-gradient(
+		235deg,
+		rgba(242, 208, 139, 1) 13%,
+		rgba(146, 200, 164, 1) 50%,
+		rgba(170, 141, 187, 1) 87%
+	);
+	background-size: 200% 200%;
+	animation: AnimationName 7s ease-in-out infinite;
+	font-family: "Montserrat", arial;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+}
+
+@keyframes AnimationName {
+	0% {
+		background-position: 0% 94%;
+	}
+	50% {
+		background-position: 100% 7%;
+	}
+	100% {
+		background-position: 0% 94%;
+	}
+}
+
+.board-title {
+	font-size: 2.25rem;
+	text-align: center;
+	color: white;
+	background: linear-gradient(
+		90deg,
+		rgba(0, 0, 0, 0) 3%,
+		rgba(0, 0, 0, 1) 20%,
+		rgba(0, 0, 0, 1) 80%,
+		rgba(0, 0, 0, 0) 97%
+	);
+	padding: 0.75rem 3.5rem;
+	position: relative;
+}
+
+.board-title::before {
+	content: url("./images/Antitodo.svg");
+	width: 75px;
+	height: 75px;
+	position: absolute;
+	left: -8%;
+	top: 25%;
+}
+
+.board-title::after {
+	content: url("./images/Maldicion.svg");
+	width: 75px;
+	height: 75px;
+	position: absolute;
+	right: -8%;
+	top: 25%;
+	rotate: -25deg;
+}
+
+.board {
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	justify-items: center;
+	align-items: center;
+	grid-template-columns: repeat(3, auto);
+	margin-bottom: 6rem;
+}
+
+.cell {
+	width: var(--cell-size);
+	height: var(--cell-size);
+	border: 1px solid black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	cursor: pointer;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+	border-top: none;
+}
+
+.cell:nth-child(3n + 1) {
+	border-left: none;
+}
+
+.cell:nth-child(3n + 3) {
+	border-right: none;
+}
+
+.cell:last-child,
+.cell:nth-child(7),
+.cell:nth-child(8) {
+	border-bottom: none;
+}
+
+.cell.maldicion,
+.cell.antitodo {
+	cursor: not-allowed;
+}
+
+.board.maldicion .cell:not(.maldicion):not(.antitodo):hover::before,
+.board.maldicion .cell:not(.maldicion):not(.antitodo):hover::after,
+.board.antitodo .cell:not(.maldicion):not(.antitodo):hover::before,
+.board.antitodo .cell:not(.maldicion):not(.antitodo):hover::after {
+	opacity: 0.1;
+}
+
+.cell.maldicion::before,
+.cell.maldicion::after,
+.board.maldicion .cell:not(.maldicion):not(.antitodo):hover::before,
+.board.maldicion .cell:not(.maldicion):not(.antitodo):hover::after {
+	content: url("./images/Maldicion.svg");
+	position: absolute;
+	width: var(--mark-size);
+	height: var(--mark-size);
+}
+
+.cell.antitodo::before,
+.cell.antitodo::after,
+.board.antitodo .cell:not(.maldicion):not(.antitodo):hover::before,
+.board.antitodo .cell:not(.maldicion):not(.antitodo):hover::after {
+	content: url("./images/Antitodo.svg");
+	position: absolute;
+	width: var(--mark-size);
+	height: var(--mark-size);
+}
+
+.winning-message {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #0e0b18;
+	background-image: url("./images/PatternGemasColorless.png");
+	background-size: cover;
+	flex-direction: column;
+	gap: 2rem;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-size: 3rem;
+	text-align: center;
+}
+
+.winning-message button {
+	font-size: 2rem;
+	background: linear-gradient(
+		135deg,
+		rgba(242, 208, 139, 0.8) 5%,
+		rgba(146, 200, 164, 0.8) 50%,
+		rgba(170, 141, 187, 0.8) 95%
+	);
+	border: 1px solid black;
+	padding: 0.25em 0.75em;
+	cursor: pointer;
+	letter-spacing: 1px;
+}
+.winning-message button:hover {
+	color: white;
+	border-color: white;
+	background: linear-gradient(
+		135deg,
+		rgba(242, 208, 139, 1) 5%,
+		rgba(146, 200, 164, 1) 50%,
+		rgba(170, 141, 187, 1) 95%
+	);
+}
+
+.winning-message.show {
+	display: flex;
+}
+
+@media (min-width: 35em) {
+	.board-title {
+		font-size: 3rem;
+	}
+}
