@@ -54,7 +54,7 @@ function endGame(draw) {
 	if (draw) {
 		winningMessageTextElement.innerText = "¡Empate!";
 	} else {
-		winningMessageTextElement.innerText = `${circleTurn ? "¡Maldición" : "¡Antitodo "} gana!`;
+		winningMessageTextElement.innerText = `${circleTurn ? "Antitodo" : "Maldición "} gana!`;
 	}
 	winningMessageElement.classList.add("show");
 }
